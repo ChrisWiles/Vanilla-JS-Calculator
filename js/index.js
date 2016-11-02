@@ -1,15 +1,15 @@
 "use strict"
 
-let input = document.getElementById('input'), // input/output button
-  number = document.querySelectorAll('.numbers div'), // number buttons
-  operator = document.querySelectorAll('.operators div'), // operator buttons
-  result = document.getElementById('result'), // equal button
-  clear = document.getElementById('clear'), // clear button
-  resultDisplayed = false // flag to keep an eye on what output is displayed
+const input = document.getElementById('input')
+const number = document.querySelectorAll('.numbers div')
+const operator = document.querySelectorAll('.operators div')
+const result = document.getElementById('result')
+const clear = document.getElementById('clear')
+let resultDisplayed = false
 
 // adding click handlers to number buttons
-for (let i = 0; i < number.length; i++) {
-  number[i].addEventListener("click", (e) => {
+number.forEach(num => {
+  num.addEventListener("click", (e) => {
 
     // storing current input string and its last character in letiables - used later
     let currentString = input.innerHTML
@@ -30,13 +30,13 @@ for (let i = 0; i < number.length; i++) {
       input.innerHTML = ""
       input.innerHTML += e.target.innerHTML
     }
-
   })
-}
+})
+
 
 // adding click handlers to number buttons
-for (let i = 0; i < operator.length; i++) {
-  operator[i].addEventListener("click", (e) => {
+operator.forEach(op => {
+  op.addEventListener("click", (e) => {
 
     // storing current input string and its last character in letiables - used later
     let currentString = input.innerHTML
@@ -53,9 +53,9 @@ for (let i = 0; i < operator.length; i++) {
       // else just add the operator pressed to the input
       input.innerHTML += e.target.innerHTML
     }
-
   })
-}
+})
+
 
 // on click of 'equal' button
 result.addEventListener("click", () => {
@@ -69,11 +69,6 @@ result.addEventListener("click", () => {
   // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
   // first we replace all the numbers and dot with empty string and then split
   let operators = inputString.replace(/[0-9]|\./g, "").split("")
-
-  console.log(inputString)
-  console.log(operators)
-  console.log(numbers)
-  console.log("----------------------------")
 
   // now we are looping through the array and doing one operation at a time.
   // first divide, then multiply, then subtraction and then addition
@@ -109,10 +104,8 @@ result.addEventListener("click", () => {
     add = operators.indexOf("+")
   }
 
-  input.innerHTML = numbers[0] // displaying the output
-
-  resultDisplayed = true // turning flag if result is displayed
+  input.innerHTML = numbers[0]
+  resultDisplayed = true
 })
 
-// clearing the input on press of clear
 clear.addEventListener("click", () => input.innerHTML = "")
